@@ -1,0 +1,496 @@
+*{
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'open sans',sans-serif;
+    background-image: linear-gradient(to right, #ffff, rgb(233, 233, 233));
+    overflow-x: hidden;
+}
+
+.dark body {
+    background-color: black;
+    color: white;
+}
+
+.wrapper {
+    width: 1100px;
+    margin: auto;
+    position: relative;
+}
+
+.logo a {
+    font-size: 50px;
+    font-weight: 800px;
+    float: left;
+    font-family: courier;
+    color: #364f6b;
+}
+
+.menu {
+    float: right;
+}
+
+nav {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    line-height: 80px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+    border-bottom: 1px solid #3f72af;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    align-items: center;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding: 0px 16px 0px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+section {
+    margin: auto;
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.kolom {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.kolom .deskripsi {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Comic sans ms';
+    color: #364f6b;
+}
+
+.harapan .kolom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: 'comic sans-ms';
+    font-weight: 800;
+    font-size: 45px;
+    margin-bottom: 20px;
+    color: #364f6b;
+    width: 100%;
+    line-height: 50px;
+}
+
+a.tbl-biru {
+    background: #3f72af;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 15px 20px 15px 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.5s;
+}
+
+a.tbl-biru:hover {
+    background: #fc5185;
+    text-decoration: none;
+}
+
+a.tbl-pink {
+    background: #fc5185;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 15px 20px 15px 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.5s;
+}
+
+.footer-sections .sosmed {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.footer-sections .sosmed a {
+    text-decoration: none;
+    list-style: none;
+    margin-left: 5px;
+    color: black;
+}
+
+p {
+    margin: 10px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
+}
+
+a.tbl-pink:hover {
+    background: #364f6b;
+    text-decoration: none;
+}
+
+.profil-icon {
+    transition: all 0.5s;
+}
+
+.profil-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.tengah {
+    text-align: center;
+    width: 100%;
+}
+
+.jurusan {
+    margin-left: 220px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.jurusan p {
+    position: relative;
+    left: 25px;
+    top: 10px;
+}
+
+.guru-jurusan {
+    margin: 0 5px;
+}
+
+.foto-guru {
+    display: flex;
+}
+
+.foto-guru img {
+    transition: all 0.5s;
+}
+
+.kepsek img {
+    transition: all 0.5s;
+}
+
+.kepsek img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.foto-guru img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.guru-jurusan img {
+    transition: all 0.5s;
+}
+
+.guru-jurusan img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.row-guru {
+    justify-content: center;
+}
+
+.kartu-guru p {
+    font-family: 'comic sans ms';
+    font-weight: 800;
+    font-size: 25px;
+    text-align: center;
+    color: #364f6b;
+}
+
+#contact {
+    background: #dedede;
+    padding: 50px 0px 50px 0px;
+}
+
+.footer {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+}
+
+.footer-section {
+    width: 20%;
+    margin: 0;
+}
+
+h3 {
+    font-family: 'comic sans ms';
+    font-weight: 800;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #364f6b;
+    width: 100%;
+    line-height: 50px;
+}
+
+.image-switch {
+    -webkit-transition: background-image 0.5s ease-in-out;
+    -o-transition: background-image 0.5s ease-in-out;
+    -moz-transition: backgound-image 0.5s ease-in-out;
+    -ms-transition: backgound-image 0.5s ease-in-out;
+    transition: background-image 0.5s ease-in-out;
+}
+
+#copyright {
+    text-align: center;
+    width: 100%;
+    padding: 50px 0px 50px 0px;
+    margin-top: 50px;
+}
+
+.toggle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 80px;
+    height: 30px;
+    margin-left: 15px;
+    position: relative;
+    border-radius: 20px;
+    display: inline-block;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: #707070;
+    transition: background-color ease 0.1s;
+  }
+
+  .toggle:before {
+    content: "Dark Light";
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    font:bold 12px/28px Helvetica;
+    text-indent: -28px;
+    word-spacing: 30px;
+    color: #fff;
+    text-shadow: -1px -1px rgba(0,0,0,0.15);
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.1s;
+  }
+
+  .home .toggle {
+    display: none;
+  }
+
+  .toggle:checked {
+    background: #4CD964;
+}
+
+  .toggle:checked:before {
+    left:55px;text-indent: -35px;
+}
+
+/* Dark Switch Mode */
+
+.html.dark body {
+    background-image: linear-gradient(to right, #0000, rgb(24, 23, 23));
+}
+
+html.dark nav {
+    background-color: black;
+    color: white;
+}
+
+html.dark ul li a {
+    color: white;
+}
+
+html.dark .footer-sections {
+    background-color: black;
+    color: white;
+}
+
+html.dark .footer-sections .sosmed a {
+    color: white;
+}
+
+html.dark #contact {
+    background-color: black;
+}
+
+html.dark .row {
+    background-color: transparent;
+    color: black;
+    opacity: 0.8;
+}
+
+/* End DarkMode switch */
+
+/* Responsive Device */
+@media screen and (max-width:991.98px) {
+    .wrapper {
+        width: 90%;
+    }
+
+    .logo a {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav .menu {
+        width: 100%;
+        margin: 0;
+    }
+
+    nav .menu ul {
+        text-align: center;
+        margin: auto;
+        line-height: 60px;
+    }
+
+    nav .menu ul li {
+        position: relative;
+        display: inline-block;
+        float: none;
+    }
+
+    section {
+        display: block;
+    }
+
+    section img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.show-fotoguru-btn {
+    transition: all 0.5s;
+    text-align: center;
+}
+
+.show-fotoguru-btn {
+    display: none;
+    text-align: center;
+}
+
+.fotoguru-hidden {
+    transition: all 0.5s;
+}
+
+.listguru-hidden {
+    display: none;
+}
+
+.foto-guru.show .fotoguru-hidden {
+    display: block;
+}
+
+@media screen and (max-width: 980px){
+    .menu ul {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .home {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 50px;
+    }
+
+    .fotoguru-hidden {
+        display: none;
+    }
+
+    .show-fotoguru-btn {
+        display: flex;
+        margin: auto;
+        text-align: center;
+    }
+
+    .jurusan p {
+        position: relative;
+        left: -10px;
+    }
+
+    .foto-guru {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .menu ul {
+        display: flex;
+        font-size: 12px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .menu ul .toggle {
+        display: none;
+    }
+
+    .home .toggle {
+        display: block;
+        margin-top: 10px;
+        margin-left: 20em;
+        z-index: 0;
+    }
+
+    .listguru-hidden {
+        display: block;
+    }
+}
+
+@media screen and ( max-width: 568px ) {
+    .home .toggle {
+        display: block;
+        margin-left: 18em;
+    }
+}
