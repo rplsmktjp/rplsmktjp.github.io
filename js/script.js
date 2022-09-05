@@ -45,3 +45,8 @@ setInterval(function(){
     }
 
 }, 4000)
+
+$('.image-3d').tilt( {
+    max: 25,
+    speed: 400
+});
