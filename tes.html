@@ -221,6 +221,8 @@
                 url,
                 method: 'POST',
                 headers,
+                dataType: 'json',
+                crossDomain: true,
                 data: JSON.stringify(body),
                 success: (response) => {
                 alert(response)
