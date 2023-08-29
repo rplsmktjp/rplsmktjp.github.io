@@ -257,7 +257,7 @@
                 },
                 error: (xhr, option, err) => {
                   $('.loading').hide()
-                  alert(xhr.responseText)
+                  alert('error :' + xhr.responseText)
                   console.log(xhr.responseText)
                 }
             })
