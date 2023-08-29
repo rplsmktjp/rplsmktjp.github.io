@@ -216,12 +216,14 @@
             await responseData.splice(0, responseData.length + 1)
         }
         function fetch(is_render = false) {
+        alert(1)
             $.ajax({
                 url,
                 method: 'POST',
                 headers,
                 data: JSON.stringify(body),
                 success: (response) => {
+                alert(response)
                     clearData()
                     //const data = JSON.parse(response)
                     const data = response.data
@@ -255,6 +257,7 @@
                 },
                 error: (xhr, option, err) => {
                   $('.loading').hide()
+                  alert(xhr.responseText)
                   console.log(xhr.responseText)
                 }
             })
