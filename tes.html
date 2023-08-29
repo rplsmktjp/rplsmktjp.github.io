@@ -1,49 +1,353 @@
-<div>
-
-    <video autoplay="true" id="video-webcam">
-
-        Browsermu tidak mendukung bro, upgrade donk!
-
-    </video>
-
-</div>
-
-<script type="text/javascript">
-
-    // seleksi elemen video
-
-    var video = document.querySelector("#video-webcam");
-
-    // minta izin user
-
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-    // jika user memberikan izin
-
-    if (navigator.getUserMedia) {
-
-        // jalankan fungsi handleVideo, dan videoError jika izin ditolak
-
-        navigator.getUserMedia({ video: true }, handleVideo, videoError);
-
-    }
-
-    // fungsi ini akan dieksekusi jika  izin telah diberikan
-
-    function handleVideo(stream) {
-
-        video.srcObject = stream;
-
-    }
-
-    // fungsi ini akan dieksekusi kalau user menolak izin
-
-    function videoError(e) {
-
-        // do something
-
-        alert("Izinkan menggunakan webcam untuk demo!")
-
-    }
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digiflazz</title>
+    <style>
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Lato',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 16px;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+        .header {
+            width: 100%;
+            background-color: green;
+            padding: 0.1px 8px;
+            color: #FFF;
+        }
+        .product-categories, .product-list, .product-brand, .product-sort {
+            margin-top: 0.5em;
+            padding: 0.3em 1em;
+            outline: none;
+        }
+        .row {
+            margin-top: 0.5em;
+        }
+        .row-items {
+            width: 100%;
+            background-color: rgb(214, 214, 214);
+            position: sticky;
+            border-radius: 0.1em;
+        }
+        .row-items-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 1em;
+        }
+        .row-items-label h1 {
+            font-size: 14px;
+            color: #FFF;
+        }
+        .row-items-label-name {
+            background-color: green;
+            width: fit-content;
+            padding: 0 1em;
+            border-bottom-right-radius: 1em;
+        }
+        .row-items-label-type h1 {
+            font-weight: 700;
+            color: #000;
+        }
+        .row-items-label-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .row-items-label-bottom h1 {
+            font-weight: 700;
+            color: #000;
+        }
+        .input-phone {
+            width: 100%;
+            border: 1px solid gray;
+            outline: none;
+            padding: 0.5em 0.6em;
+            margin: 0.5em 0;
+        }
+        .row-items-card {
+            padding: 0 1em;
+        }
+        .row-items-item {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .row-items-card p {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .row-items-price {
+            font-size: 1.3em;
+        }
+        .row-items-open {
+            text-decoration: none;
+            color: yellow;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>Silahkan Pilih Produk</h1>
+            </div>
+            <div>
+                <select class="product-categories">
+                    <option selected disabled>Pilih Kategori</option>
+                </select>
+                <select class="product-list" hidden>
+                </select>
+                <select class="product-brand">
+                    <option disabled selected>Pilih Brand</option>
+                </select>
+                <select class="product-sort">
+                    <option selected disabled>Sort</option>
+                    <option value="abjad">a-z</option>
+                    <option value="reverse">z-a</option>
+                    <option value="termurah">Termurah</option>
+                    <option value="termahal">Termahal</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" placeholder="No. Handphone" class="input-phone">
+            </div>
+            <div class="row">
+            <div class="loading" style="text-align:center;" >
+              <h1>Loading...</h1>
+            </div>
+            </div>
+        </div>
+    </div>
+<!--<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>-->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<!--<script src="http://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+<script>
+    $(function() {
+        const pulsaList = []
+        function render(value) {
+            const row = document.querySelector('.row')
+            const rowItems = document.createElement('div')
+            rowItems.classList.add('row-items')
+            // row items label
+            const rowItemsLabel = document.createElement('div')
+            rowItemsLabel.classList.add('row-items-label')
+            const rowItemsLabelName = document.createElement('div')
+            rowItemsLabelName.classList.add('row-items-label-name')
+            const rowItemsTitle = document.createElement('h1')
+            rowItemsTitle.textContent = value.product_name
+            const rowItemsLabelType = document.createElement('div')
+            rowItemsLabelType.classList.add('row-items-label-type')
+            const rowItemsLabelTypeH1 = document.createElement('h1')
+            rowItemsLabelTypeH1.textContent = value.type
+            rowItemsLabelType.appendChild(rowItemsLabelTypeH1)
+            // const rowItemsLabelTime = document.createElement('div')
+            // rowItemsLabelTime.classList.add('row-items-label-time')
+            // const rowItemsLabelTimeH1 = document.createElement('h1')
+            // rowItemsLabelTimeH1.textContent = value.type
+            // rowItemsLabelTime.appendChild(rowItemsLabelTimeH1)
+            rowItemsLabelName.appendChild(rowItemsTitle)
+            rowItemsLabel.appendChild(rowItemsLabelName)
+            rowItemsLabel.appendChild(rowItemsLabelType)
+            // rowItemsLabel.appendChild(rowItemsLabelTime)
+            // row items card
+            const rowItemsCard = document.createElement('div')
+            rowItemsCard.classList.add('row-items-card')
+            const rowItemsItem = document.createElement('div')
+            rowItemsItem.classList.add('row-items-item')
+            const rowItemsItemH1 = document.createElement('h1')
+            rowItemsItemH1.classList.add('row-items-title')
+            rowItemsItemH1.textContent = value.buyer_sku_code
+            rowItemsItem.appendChild(rowItemsItemH1)
+            const productPrice = value.price >= 0 && value.price <= 50000 ? value.price + 2000 : value.price
+            const price = 'Rp' + Intl.NumberFormat('id-ID').format(productPrice).replace(',', '.')
+            const rowItemsItemA = document.createElement('a')
+            const message = `Hallo saya ingin membeli produk Anda dengan keterangan sebagai berikut : \nPRODUK : ${value.product_name}\nSKU : ${value.buyer_sku_code}\nHARGA : ${price}\nDESC : ${value.desc}\nON : ${value.start_cut_off} s/d ${value.end_cut_off}`
+            const link = `https://api.whatsapp.com/send?phone=685760682667&text=${message}`
+            rowItemsItemA.setAttribute('href', link)
+            rowItemsItemA.classList.add('row-items-open')
+            rowItemsItemA.textContent = 'Open'
+            rowItemsItem.appendChild(rowItemsItemA)
+            const rowItemsItemPrice = document.createElement('h1')
+            rowItemsItemPrice.classList.add('row-items-price')
+            rowItemsItemPrice.textContent = price
+            rowItemsItem.appendChild(rowItemsItemPrice)
+            rowItemsCard.appendChild(rowItemsItem)
+            const rowItemsCardP = document.createElement('p')
+            rowItemsCardP.textContent = value.desc
+            rowItemsCard.appendChild(rowItemsCardP)
+            const rowItemCardTime = document.createElement('div')
+            rowItemCardTime.classList.add('row-items-label-bottom')
+            const rowItemCardTimeH1 = document.createElement('p')
+            rowItemCardTimeH1.textContent = value.start_cut_off + ' s/d ' + value.end_cut_off
+            rowItemCardTime.appendChild(rowItemCardTimeH1)
+            const rowItemCardCategory = document.createElement('h1')
+            rowItemCardCategory.textContent = value.category
+            const rowItemsCardBrand = document.createElement('h1')
+            rowItemsCardBrand.textContent = value.brand
+            rowItemCardTime.appendChild(rowItemCardCategory)
+            rowItemCardTime.appendChild(rowItemsCardBrand)
+            rowItemsCard.appendChild(rowItemCardTime)
+            // Append Element
+            rowItems.appendChild(rowItemsLabel)
+            rowItems.appendChild(rowItemsCard)
+            row.appendChild(rowItems)
+        }
+        let responseData = []
+        const url = 'https://api.digiflazz.com/v1/price-list'
+        const username = "bajawugdemZo"
+        const headers = {
+            "Content-Type": "application/json"
+        }
+        const body = {
+            cmd: 'prepaid',
+            username: username,
+            sign: "b264eaa7dbe407f7320b9e618573bd03"
+        }
+        async function clearData() {
+            await responseData.splice(0, responseData.length + 1)
+        }
+        function fetch(is_render = false) {
+        alert(1)
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          alert(xhttp.responseText)
+        } else {
+          alert(xhttp.responseText)
+        }
+        };
+        xhttp.open("GET", "http://sabahchat.rf.gd", true);
+        xhttp.send();
+            /*$.ajax({
+                url,
+                method: 'POST',
+                headers,
+                data: JSON.stringify(body),
+                success: (response) => {
+                    alert(response)
+                    clearData()
+                    const data = JSON.parse(response)
+                    //const data = response.data
+                    data.data.map((value) => {
+                        responseData.push(value)
+                    })
+                    let category = []
+                    let brand = []
+                    if ( is_render === true ) {
+                        $('.loading').hide()
+                        data.data.map((value) => {
+                            if ( category.includes(value.category) === false ) {
+                                const productCategories = document.querySelector('.product-categories')
+                                const productCategoriesItem = document.createElement('option')
+                                productCategoriesItem.setAttribute('value', value.category)
+                                productCategoriesItem.textContent = value.category
+                                productCategories.appendChild(productCategoriesItem)
+                                category.push(value.category)
+                            }
+                            if ( brand.includes(value.brand) === false ) {
+                                const productBrand = document.querySelector('.product-brand')
+                                const productBrandItem = document.createElement('option')
+                                productBrandItem.setAttribute('value', value.brand)
+                                productBrandItem.textContent = value.brand
+                                productBrand.appendChild(productBrandItem)
+                                brand.push(value.brand)
+                            }
+                            render(value)
+                        })
+                    }
+                },
+                error: (xhr, option, err) => {
+                  $('.loading').hide()
+                  //alert(xhr.responseText)
+                  console.log(xhr.responseText)
+                }
+            })*/
+        }
+        fetch(true)
+        $('.product-categories').on('change', function(e) {
+            $('.row').html('')
+            $('.product-list').hide()
+            $('.product-list').html('')
+            fetch()
+            const pulsalist = []
+            responseData.map((value) => {
+                if ( pulsalist.includes(value.brand) === false && value.category.toLowerCase() === e.target.value.toLowerCase() ) {
+                    pulsaList.push({name: value.brand})
+                }
+                if ( value.category.toLowerCase() === e.target.value.toLowerCase() ) {
+                    render(value)
+                    responseData.push(value)
+                }
+            })
+            if ( e.target.value.toLowerCase() === 'pulsa' ) {
+                $('.product-list').show()
+                const productList = document.querySelector('.product-list')
+                const productItems = document.createElement('option')
+                productItems.setAttribute('selected', '')
+                productItems.setAttribute('disabled', '')
+                productItems.textContent = "Pilih Produk"
+                productList.appendChild(productItems)
+                pulsaList.map((value) => {
+                    const productItems = document.createElement('option')
+                    productItems.setAttribute('value', value.name)
+                    productItems.textContent = value.name
+                    productList.appendChild(productItems)
+                })
+            }
+        })
+        $('.product-list').on('change', async function(e) {
+            $('.row').html('')
+            responseData.map((value) => {
+                if ( e.target.value.toLowerCase() === value.brand.toLowerCase() ) {
+                    render(value)
+                }
+            })
+        })
+        $('.product-brand').on('change', function(e) {
+            $('.row').html('')
+            responseData.map((value) => {
+                if ( e.target.value.toLowerCase() === value.brand.toLowerCase() ) {
+                    render(value)
+                }
+            })
+        })
+        $('.product-sort').on('change', function(e) {
+            $('.row').html('')
+            if ( e.target.value === 'reverse' ) {
+                const data = responseData.sort((a, b) => (a.product_name.localeCompare(b.product_name) ? -1 : 1))
+                data.map((value) => {
+                    render(value)
+                })
+            }
+            if ( e.target.value === 'abjad' ) {
+                const data = responseData.sort((a, b) => (a.product_name.localeCompare(b.product_name)))
+                data.map((value) => {
+                    render(value)
+                })
+            }
+            if ( e.target.value === 'termurah' ) {
+                const data = responseData.sort((a, b) => (a.price > b.price ? 1 : -1))
+                data.map((value) => {
+                    render(value)
+                })
+            }
+            if ( e.target.value === 'termahal' ) {
+                const data = responseData.sort((a, b) => (a.price < b.price ? 1 : -1))
+                data.map((value) => {
+                    render(value)
+                })
+            }
+        })
+    })
 </script>
+</body>
+</html>
