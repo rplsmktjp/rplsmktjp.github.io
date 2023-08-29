@@ -216,35 +216,23 @@
             await responseData.splice(0, responseData.length + 1)
         }
         function fetch(is_render = false) {
-        alert(1)
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          alert(xhttp.responseText)
-        } else {
-          alert(xhttp.responseText)
-        }
-        };
-        xhttp.open("GET", "http://sabahchat.rf.gd", true);
-        xhttp.send();
-            /*$.ajax({
+            $.ajax({
                 url,
                 method: 'POST',
                 headers,
                 data: JSON.stringify(body),
                 success: (response) => {
-                    alert(response)
                     clearData()
-                    const data = JSON.parse(response)
-                    //const data = response.data
-                    data.data.map((value) => {
+                    //const data = JSON.parse(response)
+                    const data = response.data
+                    data.map((value) => {
                         responseData.push(value)
                     })
                     let category = []
                     let brand = []
                     if ( is_render === true ) {
                         $('.loading').hide()
-                        data.data.map((value) => {
+                        data.map((value) => {
                             if ( category.includes(value.category) === false ) {
                                 const productCategories = document.querySelector('.product-categories')
                                 const productCategoriesItem = document.createElement('option')
@@ -267,10 +255,9 @@
                 },
                 error: (xhr, option, err) => {
                   $('.loading').hide()
-                  //alert(xhr.responseText)
                   console.log(xhr.responseText)
                 }
-            })*/
+            })
         }
         fetch(true)
         $('.product-categories').on('change', function(e) {
